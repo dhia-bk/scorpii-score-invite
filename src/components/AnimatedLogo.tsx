@@ -3,7 +3,7 @@ import React from "react";
 
 const AnimatedLogo: React.FC = () => {
   return (
-    <div className="flex items-center justify-center py-4 animate-fade-in">
+    <div className="hidden">
       <div className="relative w-14 h-14 flex items-center justify-center">
         <svg
           viewBox="0 0 100 100"
