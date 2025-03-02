@@ -7,61 +7,65 @@ const Index: React.FC = () => {
   
   // Add animated background effects
   useEffect(() => {
-    // Parallax effect for orbs
-    const handleScroll = () => {
+    // Create animated shards
+    const createShard = () => {
       if (!containerRef.current) return;
       
-      const scrollY = window.scrollY;
-      const elements = containerRef.current.querySelectorAll('.parallax');
+      const shard = document.createElement('div');
+      shard.classList.add('shard');
       
-      elements.forEach((el, index) => {
-        const speed = index % 2 === 0 ? 0.05 : -0.05;
-        const yPos = scrollY * speed;
-        (el as HTMLElement).style.transform = `translateY(${yPos}px)`;
-      });
+      // Random size between 20-60px
+      const size = Math.random() * 40 + 20;
+      shard.style.width = `${size}px`;
+      shard.style.height = `${size}px`;
+      
+      // Random position
+      shard.style.left = `${Math.random() * 100}%`;
+      shard.style.top = `${Math.random() * 100}%`;
+      
+      // Random rotation
+      const rotation = Math.random() * 360;
+      shard.style.transform = `rotate(${rotation}deg)`;
+      
+      // Random animation duration between 15-30s
+      const duration = Math.random() * 15 + 15;
+      shard.style.animationDuration = `${duration}s`;
+      
+      // Random delay
+      const delay = Math.random() * 5;
+      shard.style.animationDelay = `${delay}s`;
+      
+      // Random opacity
+      shard.style.opacity = `${Math.random() * 0.3 + 0.1}`;
+      
+      // Add to container
+      containerRef.current.querySelector('.shards-container')?.appendChild(shard);
     };
-
-    // Floating animation for orbs
-    const orbs = containerRef.current?.querySelectorAll('.orb') || [];
-    orbs.forEach((orb, index) => {
-      const delay = index * 0.5;
-      const element = orb as HTMLElement;
-      element.style.animation = `float 8s ease-in-out ${delay}s infinite`;
-    });
     
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Create initial shards
+    const shardCount = 20;
+    for (let i = 0; i < shardCount; i++) {
+      createShard();
+    }
+    
+    // Create new shards periodically
+    const interval = setInterval(() => {
+      if (containerRef.current?.querySelectorAll('.shard').length > 30) {
+        // Remove oldest shard if we have too many
+        const oldestShard = containerRef.current.querySelector('.shard');
+        oldestShard?.remove();
+      }
+      createShard();
+    }, 3000);
+    
+    return () => clearInterval(interval);
   }, []);
   
   return (
-    <div ref={containerRef} className="min-h-screen relative overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-blue-500 to-indigo-800 animate-gradient-x"></div>
-      
-      {/* Moving particles/stars */}
-      <div className="stars-container absolute inset-0">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div 
-            key={i}
-            className="star absolute rounded-full bg-white/30"
-            style={{
-              width: `${Math.random() * 4 + 1}px`,
-              height: `${Math.random() * 4 + 1}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `twinkle ${Math.random() * 5 + 3}s linear ${Math.random() * 5}s infinite`
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Glowing orbs with parallax and floating effect */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[5%] right-[15%] w-32 h-32 rounded-full bg-blue-400/20 backdrop-blur-sm parallax orb glow" />
-        <div className="absolute top-[25%] left-[8%] w-40 h-40 rounded-full bg-purple-500/20 backdrop-blur-sm parallax orb glow" />
-        <div className="absolute bottom-[35%] right-[10%] w-56 h-56 rounded-full bg-indigo-400/20 backdrop-blur-sm parallax orb glow" />
-        <div className="absolute bottom-[15%] left-[20%] w-48 h-48 rounded-full bg-cyan-400/20 backdrop-blur-sm parallax orb glow" />
-        <div className="absolute top-[50%] left-[40%] w-24 h-24 rounded-full bg-pink-400/20 backdrop-blur-sm parallax orb glow" />
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden bg-white">
+      {/* Shards container */}
+      <div className="shards-container absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Shards will be dynamically added here */}
       </div>
       
       {/* Content */}
@@ -70,7 +74,7 @@ const Index: React.FC = () => {
           <ScorpiiForm />
           
           <div className="mt-8 text-center">
-            <p className="text-xs text-white/70">
+            <p className="text-xs text-gray-500">
               &copy; {new Date().getFullYear()} Scorpii Score. All rights reserved.
             </p>
           </div>

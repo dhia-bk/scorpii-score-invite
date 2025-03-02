@@ -150,7 +150,73 @@
     text-wrap: balance;
   }
   
-  /* Animations for the background */
+  /* Shard related animations */
+  .shard {
+    position: absolute;
+    background-color: #0EA5E9;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation: float-shard linear infinite;
+    will-change: transform;
+  }
+  
+  .shard:nth-child(2n) {
+    background-color: #0072CE;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  }
+  
+  .shard:nth-child(3n) {
+    background-color: #33C3F0;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  
+  .shard:nth-child(4n) {
+    background-color: #1EAEDB;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  }
+  
+  @keyframes float-shard {
+    0% {
+      transform: translateX(-50px) translateY(-50px) rotate(0deg);
+    }
+    100% {
+      transform: translateX(calc(100vw + 50px)) translateY(calc(100vh + 50px)) rotate(360deg);
+    }
+  }
+  
+  /* Additional animations */
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes drift {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    25% {
+      transform: translateX(20px) translateY(-10px);
+    }
+    50% {
+      transform: translateX(0) translateY(-20px);
+    }
+    75% {
+      transform: translateX(-20px) translateY(-10px);
+    }
+  }
+  
+  .animate-drift {
+    animation: drift 15s ease-in-out infinite;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse-subtle 4s ease-in-out infinite;
+  }
+
+  /* Keeping existing animations */
   @keyframes float {
     0%, 100% {
       transform: translateY(0);
@@ -169,11 +235,6 @@
     }
   }
   
-  .animate-gradient-x {
-    background-size: 200% 200%;
-    animation: gradient 15s ease infinite;
-  }
-  
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -184,12 +245,6 @@
     100% {
       background-position: 0% 50%;
     }
-  }
-  
-  /* Glow effect for orbs */
-  .glow {
-    box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.2);
-    animation: pulse 4s infinite ease-in-out;
   }
   
   @keyframes pulse {
