@@ -149,4 +149,55 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Animations for the background */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Glow effect for orbs */
+  .glow {
+    box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.2);
+    animation: pulse 4s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px 15px rgba(255, 255, 255, 0.4);
+    }
+  }
 }
