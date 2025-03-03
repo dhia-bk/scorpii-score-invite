@@ -3,7 +3,9 @@ export interface FormData {
   fullName: string;
   email: string;
   phone: string;
+  phoneDialCode: string;
   country: string;
+  countryCode: string;
   socialMedia: {
     instagram: boolean;
     facebook: boolean;
@@ -20,7 +22,9 @@ export const initialFormData: FormData = {
   fullName: "",
   email: "",
   phone: "",
+  phoneDialCode: "+44", // Default to UK
   country: "",
+  countryCode: "",
   socialMedia: {
     instagram: false,
     facebook: false,
@@ -51,7 +55,7 @@ export const validateForm = (data: FormData): { isValid: boolean; errors: Partia
     errors.email = "Please enter a valid email address";
   }
   
-  if (!data.country.trim()) {
+  if (!data.countryCode) {
     errors.country = "Country of residence is required";
   }
   

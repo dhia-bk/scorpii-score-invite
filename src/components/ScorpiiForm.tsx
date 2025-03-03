@@ -10,6 +10,9 @@ import FormField from "./FormField";
 import SocialMediaCheckbox from "./SocialMediaCheckbox";
 import AnimatedLogo from "./AnimatedLogo";
 import { FormData, initialFormData, validateForm, submitForm } from "@/utils/formUtils";
+import { countries } from "@/utils/countryData";
+import CountryDropdown from "./CountryDropdown";
+import PhoneInput from "./PhoneInput";
 
 const ScorpiiForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -30,6 +33,35 @@ const ScorpiiForm: React.FC = () => {
       setErrors((prev) => ({
         ...prev,
         [name]: undefined,
+      }));
+    }
+  };
+  
+  const handlePhoneChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      phone: value,
+    }));
+  };
+  
+  const handlePhoneCountryChange = (dialCode: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      phoneDialCode: dialCode,
+    }));
+  };
+  
+  const handleCountryChange = (country: any) => {
+    setFormData((prev) => ({
+      ...prev,
+      country: country.name,
+      countryCode: country.code,
+    }));
+    // Clear country error
+    if (errors.country) {
+      setErrors((prev) => ({
+        ...prev,
+        country: undefined,
       }));
     }
   };
@@ -134,7 +166,7 @@ const ScorpiiForm: React.FC = () => {
             >
               <path d="M12 13V15" />
               <path d="M12 9h.01" />
-              <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z" />
+              <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0 Z" />
             </svg>
           </div>
           <p className="text-sm text-muted-foreground mb-6">
@@ -150,6 +182,10 @@ const ScorpiiForm: React.FC = () => {
       </div>
     );
   }
+  
+  // Find the selected country for the dropdown
+  const selectedCountry = formData.countryCode ? 
+    countries.find(c => c.code === formData.countryCode) || null : null;
   
   return (
     <div className="form-container">
@@ -213,24 +249,25 @@ const ScorpiiForm: React.FC = () => {
               className="mb-4"
             />
             
-            <FormField
+            <PhoneInput
               id="phone"
               label="3. Please provide your phone number if you would be happy to be added to an exclusive WhatsApp group of other Scorpii Score early adopters"
-              type="tel"
               value={formData.phone}
-              onChange={handleInputChange}
+              countryCode={formData.phoneDialCode}
+              onChange={handlePhoneChange}
+              onCountryChange={handlePhoneCountryChange}
               placeholder="Enter your phone number (optional)"
               className="mb-4"
             />
             
-            <FormField
+            <CountryDropdown
               id="country"
               label="4. Please state your country of residence"
-              type="text"
-              value={formData.country}
-              onChange={handleInputChange}
+              countries={countries}
+              selectedCountry={selectedCountry}
+              onSelect={handleCountryChange}
               required
-              placeholder="Enter your country of residence"
+              placeholder="Select your country of residence"
               error={errors.country}
               className="mb-4"
             />
