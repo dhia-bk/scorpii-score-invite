@@ -74,7 +74,11 @@ const CountryDropdown: React.FC<CountryDropdownProps> = ({
         >
           {selectedCountry ? (
             <div className="flex items-center gap-2 w-full">
-              <span className="text-xl">{selectedCountry.flag}</span>
+              <img 
+                src={selectedCountry.flagUrl} 
+                alt={`${selectedCountry.name} flag`}
+                className="w-5 h-auto object-contain"
+              />
               <span>{selectedCountry.name}</span>
             </div>
           ) : (
@@ -115,7 +119,11 @@ const CountryDropdown: React.FC<CountryDropdownProps> = ({
                     className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => handleSelect(country)}
                   >
-                    <span className="text-xl">{country.flag}</span>
+                    <img 
+                      src={country.flagUrl} 
+                      alt={`${country.name} flag`}
+                      className="w-5 h-auto object-contain"
+                    />
                     <span>{country.name}</span>
                   </li>
                 ))

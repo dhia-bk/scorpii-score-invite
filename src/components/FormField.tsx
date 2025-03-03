@@ -32,6 +32,7 @@ const FormField: React.FC<FormFieldProps> = ({
       return (
         <textarea
           id={formControlId}
+          name={id}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -47,6 +48,7 @@ const FormField: React.FC<FormFieldProps> = ({
     return (
       <input
         id={formControlId}
+        name={id}
         type={type}
         value={value}
         onChange={onChange}

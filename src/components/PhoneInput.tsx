@@ -60,7 +60,11 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
             onClick={() => setIsOpen(!isOpen)}
             className="h-full flex items-center gap-1 px-3 border border-r-0 border-gray-200 rounded-l-md bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <span className="text-lg">{selectedCountry.flag}</span>
+            <img 
+              src={selectedCountry.flagUrl} 
+              alt={`${selectedCountry.name} flag`}
+              className="w-5 h-auto object-contain"
+            />
             <span className="text-sm">{selectedCountry.dial_code}</span>
             <svg 
               className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
@@ -97,7 +101,11 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
                       className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
                       onClick={() => handleCountrySelect(country)}
                     >
-                      <span className="text-xl">{country.flag}</span>
+                      <img 
+                        src={country.flagUrl} 
+                        alt={`${country.name} flag`}
+                        className="w-5 h-auto object-contain"
+                      />
                       <span className="text-sm">{country.dial_code}</span>
                       <span className="text-sm text-gray-600">{country.name}</span>
                     </li>
