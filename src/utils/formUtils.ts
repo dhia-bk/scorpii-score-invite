@@ -70,14 +70,35 @@ export const validateForm = (data: FormData): { isValid: boolean; errors: Partia
 };
 
 export const submitForm = async (data: FormData): Promise<{ success: boolean; message: string }> => {
-  // Simulate an API call with a timeout
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Form submitted:", data);
-      resolve({
-        success: true,
-        message: "Thank you for your submission! We'll be in touch soon."
-      });
-    }, 1500);
-  });
+  try {
+    // Log the form data to console for debugging
+    console.log("Submitting form data:", data);
+    
+    // In a real application, this would be an API call to your backend
+    // For now, simulate an API call with a timeout
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // You can add more sophisticated logic here if needed
+        const success = true; // Simulate a successful submission
+        
+        if (success) {
+          resolve({
+            success: true,
+            message: "Thank you for your submission! We'll be in touch soon."
+          });
+        } else {
+          resolve({
+            success: false,
+            message: "There was a problem submitting your form. Please try again."
+          });
+        }
+      }, 1500); // Simulate network delay
+    });
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    return {
+      success: false,
+      message: "An unexpected error occurred. Please try again later."
+    };
+  }
 };
