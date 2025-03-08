@@ -62,7 +62,7 @@ const Index: React.FC = () => {
   }, []);
   
   return (
-    <div ref={containerRef} className="min-h-screen relative overflow-hidden bg-scorpii-dark">
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden bg-white">
       {/* Shards container */}
       <div className="shards-container absolute inset-0 overflow-hidden pointer-events-none">
         {/* Shards will be dynamically added here */}
@@ -74,7 +74,7 @@ const Index: React.FC = () => {
           <ScorpiiForm />
           
           <div className="mt-8 text-center">
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-500">
               &copy; {new Date().getFullYear()} Scorpii Score. All rights reserved.
             </p>
           </div>
