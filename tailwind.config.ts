@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,11 +64,14 @@ export default {
           ring: "hsl(var(--sidebar-ring))"
         },
         scorpii: {
-          blue: "#0072CE",
-          dark: "#1B1B1F",
-          light: "#F5F5F7",
-          accent: "#007AFF",
-          success: "#34C759"
+          dark: "#1A1F2C",       // Dark background from logo
+          white: "#FFFFFF",      // White soccer ball segments
+          orange: "#F97316",     // Central orange star
+          "orange-light": "#FEC6A1", // Lighter orange star
+          blue: "#0EA5E9",       // Blue stars
+          "blue-light": "#93C5FD", // Light blue stars
+          accent: "#F97316",     // Using orange as accent color
+          success: "#34C759"     // Keeping the existing success color
         }
       },
       borderRadius: {
